@@ -1,36 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>MindAR Video Demo</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.7/dist/mindar-image-aframe.prod.js"></script>
-    <style>body { margin: 0; }</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindAR Demo</title>
+    <!-- Thêm link đến MindAR -->
+    <script src="https://cdn.jsdelivr.net/gh/MindAR-js/aframe/dist/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/MindAR-js/aframe/dist/aframe-mindar.js"></script>
   </head>
   <body>
-    <a-scene
-      mindar-image="imageTargetSrc: ./target.mind;"
-      embedded
-      color-space="sRGB"
-      device-orientation-permission-ui="enabled: true"
-      renderer="colorManagement: true, physicallyCorrectLights">
-      
+    <h1>MindAR Demo</h1>
+
+    <a-scene mindar="imageTargetSrc: target.mind;">
+      <!-- Thêm video hoặc các đối tượng AR -->
       <a-assets>
-  	<video id="video" src="video-demo.mp4" preload="auto" loop crossorigin="anonymous"></video>
+        <!-- Tải video -->
+        <video id="video" src="video-demo.mp4" preload="auto" loop crossorigin="anonymous"></video>
       </a-assets>
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
+      <!-- Image target -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-video 
-          src="#video" 
-          width="1" 
-          height="0.6" 
-          position="0 0 0" 
+        <!-- Hiển thị video trên target -->
+        <a-video
+          src="#video"
+          width="1"
+          height="0.6"
+          position="0 0 0"
           autoplay
           loop
-          muted>
-        </a-video>
+          muted
+        ></a-video>
       </a-entity>
     </a-scene>
   </body>
