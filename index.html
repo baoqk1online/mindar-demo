@@ -2,61 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <title>AR Video Without Marker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MindAR Fullscreen</title>
-
-    <!-- A-Frame & MindAR -->
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
-
     <style>
-      html,
-      body {
+      html, body {
         margin: 0;
-        padding: 0;
-        overflow: hidden;
-        width: 100%;
         height: 100%;
-      }
-      a-scene {
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
+        overflow: hidden;
       }
     </style>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const target = document.querySelector("a-entity[mindar-image-target]");
-        const video = document.querySelector("#vid");
-
-        if (target && video) {
-          target.addEventListener("targetFound", () => {
-            video.play();
-          });
-
-          target.addEventListener("targetLost", () => {
-            video.pause();
-          });
-        }
-      });
-    </script>
   </head>
   <body>
     <a-scene
-      mindar-image="imageTargetSrc: target.mind"
-      color-space="sRGB"
-      renderer="colorManagement: true, physicallyCorrectLights"
+      embedded
       vr-mode-ui="enabled: false"
-      device-orientation-permission-ui="enabled: false"
+      device-orientation-permission-ui="enabled: true"
     >
       <a-assets>
         <video
-          id="vid"
+          id="video"
           src="video-demo.mp4"
-          preload="auto"
+          autoplay
           loop
           muted
           playsinline
@@ -64,19 +31,16 @@
         ></video>
       </a-assets>
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-camera position="0 1.6 0"></a-camera>
 
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-video
-          src="#vid"
-          width="1"
-          height="0.5625"
-          position="0 0 0"
-          autoplay
-          muted
-          loop
-        ></a-video>
-      </a-entity>
+      <!-- Video được đặt nổi cách camera 2m -->
+      <a-video
+        src="#video"
+        width="1.6"
+        height="0.9"
+        position="0 1.6 -2"
+        rotation="0 0 0"
+      ></a-video>
     </a-scene>
   </body>
 </html>
