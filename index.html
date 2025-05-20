@@ -3,13 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MindAR Video Demo</title>
+    <title>MindAR Fullscreen</title>
 
     <!-- A-Frame & MindAR -->
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
 
-    <!-- Video auto play on marker detection -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+      }
+      a-scene {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+    </style>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const target = document.querySelector("a-entity[mindar-image-target]");
@@ -27,17 +44,15 @@
       });
     </script>
   </head>
-  <body style="margin: 0; overflow: hidden">
+  <body>
     <a-scene
       mindar-image="imageTargetSrc: target.mind"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
-      embedded
     >
       <a-assets>
-        <!-- Video local -->
         <video
           id="vid"
           src="video-demo.mp4"
